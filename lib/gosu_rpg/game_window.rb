@@ -11,5 +11,9 @@ module GosuRPG
     def draw
       raise NotImplemented, 'Your Window class must implement the draw method!'
     end
+
+    def button_down(id)
+      close if id == Gosu::KbEscape
+    end
   end
 end
