@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '>= 3.0.0'
   gem.add_development_dependency 'rspec-mocks', '>= 3.0.0'
 
+  gem.add_dependency 'gosu'
   gem.add_dependency 'pry'
   gem.add_dependency 'pry-nav'
 end
