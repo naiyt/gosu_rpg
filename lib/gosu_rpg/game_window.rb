@@ -1,13 +1,9 @@
-require 'singleton'
-
 module GosuRPG
   class GameWindow < Gosu::Window
-    include Singleton
-
     attr_accessor :state
 
-    def initialize
-      super 800, 600 # TODO: use a config object to set these
+    def initialize(width, height, fullscreen=false)
+      super width, height, fullscreen
     end
 
     def update

@@ -11,10 +11,15 @@ module GosuRPG
   end
 
   def self.config
-    @config || Config.new
+    @config ||= Config.new
   end
 
   def self.reset
     @config = Config.new
+  end
+
+  def self.play(initial_state)
+    GameState.switch(initial_state)
+    config.window.show
   end
 end

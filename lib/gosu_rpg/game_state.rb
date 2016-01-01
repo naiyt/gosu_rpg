@@ -1,11 +1,11 @@
 module GosuRPG
   class GameState
     def initialize
-      @window = GosuRPG::GameWindow.instance
+      @window = GosuRPG.config.window
     end
 
     def self.switch(new_state)
-      window = GosuRPG::GameWindow.instance
+      window = GosuRPG.config.window
       window.state.leave if window.state
       window.state = new_state
       new_state.enter

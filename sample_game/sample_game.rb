@@ -18,7 +18,8 @@ class SampleState < GosuRPG::GameState
   end
 end
 
-window = GosuRPG::GameWindow.instance
-state = SampleState.new
-GosuRPG::GameState.switch(state)
-window.show
+GosuRPG.configure do |config|
+  config.window = GosuRPG::GameWindow.new(1920, 1080)
+end
+
+GosuRPG.play(SampleState.new)
