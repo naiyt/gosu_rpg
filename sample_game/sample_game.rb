@@ -7,19 +7,21 @@ class SampleState < GosuRPG::GameState
     super
 
     @window.caption = 'Sweet Sample State'
+
+    @font = Gosu::Font.new(@config.font_size)
   end
 
   def update
-
   end
 
   def draw
-
+    @font.draw('A cool menu state!', 10, 10, 0)
   end
 end
 
 GosuRPG.configure do |config|
-  config.window = GosuRPG::GameWindow.new(1920, 1080)
+  config.window    = GosuRPG::GameWindow.new(500, 500)
+  config.font_size = 50
 end
 
 GosuRPG.play(SampleState.new)
