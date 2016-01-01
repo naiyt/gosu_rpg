@@ -3,10 +3,10 @@
 require 'gosu_rpg'
 
 module ZOrder
-  BACKGROUND, UI = *0..2
+  BACKGROUND, UI, CURSOR = *0..2
 end
 
-def background_path(type, file)
+def asset_path(type, file)
   File.join('sample_game', 'assets', type, file)
 end
 
@@ -15,7 +15,7 @@ class SampleState < GosuRPG::GameState
     super
 
     @window.caption = 'Sweet Sample State'
-    @background_image = Gosu::Image.new(background_path('backgrounds', 'steampunk.png'), tileable: true)
+    @background_image = Gosu::Image.new(asset_path('backgrounds', 'steampunk.png'), tileable: true)
   end
 
   def update
@@ -36,7 +36,10 @@ class AnotherState < GosuRPG::GameState
     super
 
     @window.caption = 'Whoa, a second state!'
-    @background_image = Gosu::Image.new(background_path('backgrounds', 'space.png'), tileable: true)
+    @background_image = Gosu::Image.new(asset_path('backgrounds', 'space.png'), tileable: true)
+    @cursor = Gosu::Image.new(asset_path('icons', 'arrow-cursor.png'), false)
+
+    @text_field = GosuRPG::TextField.new(@window, @font, 50, 50)
   end
 
   def update
@@ -44,11 +47,15 @@ class AnotherState < GosuRPG::GameState
 
   def draw
     @background_image.draw(0, 0, ZOrder::BACKGROUND)
-    @font.draw('This state is even better!!', 20, 20, 0)
+    @text_field.draw(ZOrder::UI)
+    @cursor.draw(@window.mouse_x, @window.mouse_y, ZOrder::CURSOR)
   end
 
   def button_down(id)
-    GosuRPG::GameState.switch(SampleState.new) if id == Gosu::Kb1
+    if id == Gosu::MsLeft then
+      @window.text_input = @text_field if @text_field.under_point?(@window.mouse_x, @window.mouse_y)
+      @window.text_input.move_caret(@window.mouse_x) unless @window.text_input.nil?
+    end
   end
 end
 
@@ -57,4 +64,4 @@ GosuRPG.configure do |config|
   config.font_size = 50
 end
 
-GosuRPG.play(SampleState.new)
+GosuRPG.play(AnotherState.new)
