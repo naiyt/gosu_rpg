@@ -1,19 +1,27 @@
+require 'singleton'
+
 module GosuRPG
   class GameWindow < Gosu::Window
-    def initialize(w_width, w_height)
-      super w_width, w_height
+    include Singleton
+
+    attr_accessor :state
+
+    def initialize
+      super 800, 600 # TODO: use a config object to set these
+      self.caption = 'Cool caption'
     end
 
     def update
-      raise NotImplemented, 'Your Window class must implement the update method!'
+      @state.update
     end
 
     def draw
-      raise NotImplemented, 'Your Window class must implement the draw method!'
+      @state.draw
     end
 
     def button_down(id)
       close if id == Gosu::KbEscape
+      @state.button_down(id)
     end
   end
 end

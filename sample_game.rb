@@ -2,10 +2,8 @@
 
 require 'gosu_rpg'
 
-class SampleWindow < GosuRPG::GameWindow
+class SampleState < GosuRPG::GameState
   def initialize
-    super 700, 700
-    self.caption = 'A sample Gosu RPG!'
   end
 
   def update
@@ -17,5 +15,7 @@ class SampleWindow < GosuRPG::GameWindow
   end
 end
 
-window = SampleWindow.new
+window = GosuRPG::GameWindow.instance
+state = SampleState.new
+GosuRPG::GameState.switch(state)
 window.show
