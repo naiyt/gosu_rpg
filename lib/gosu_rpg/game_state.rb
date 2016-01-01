@@ -3,6 +3,7 @@ module GosuRPG
     def initialize
       @config = GosuRPG.config
       @window = @config.window
+      @font = Gosu::Font.new(@config.font_size)
     end
 
     def self.switch(new_state)

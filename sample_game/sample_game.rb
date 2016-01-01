@@ -7,8 +7,6 @@ class SampleState < GosuRPG::GameState
     super
 
     @window.caption = 'Sweet Sample State'
-
-    @font = Gosu::Font.new(@config.font_size)
   end
 
   def update
