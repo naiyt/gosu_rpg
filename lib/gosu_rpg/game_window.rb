@@ -8,7 +8,6 @@ module GosuRPG
 
     def initialize
       super 800, 600 # TODO: use a config object to set these
-      self.caption = 'Cool caption'
     end
 
     def update

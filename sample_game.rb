@@ -4,6 +4,9 @@ require 'gosu_rpg'
 
 class SampleState < GosuRPG::GameState
   def initialize
+    super
+
+    @window.caption = 'Sweet Sample State'
   end
 
   def update

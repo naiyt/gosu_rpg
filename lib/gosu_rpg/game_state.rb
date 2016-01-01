@@ -1,6 +1,7 @@
 module GosuRPG
   class GameState
     def initialize
+      @window = GosuRPG::GameWindow.instance
     end
 
     def self.switch(new_state)
