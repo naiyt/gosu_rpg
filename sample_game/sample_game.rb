@@ -2,17 +2,27 @@
 
 require 'gosu_rpg'
 
+module ZOrder
+  BACKGROUND, UI = *0..2
+end
+
+def background_path(type, file)
+  File.join('sample_game', 'assets', type, file)
+end
+
 class SampleState < GosuRPG::GameState
   def initialize
     super
 
     @window.caption = 'Sweet Sample State'
+    @background_image = Gosu::Image.new(background_path('backgrounds', 'steampunk.png'), tileable: true)
   end
 
   def update
   end
 
   def draw
+    @background_image.draw(0, 0, ZOrder::BACKGROUND)
     @font.draw('A cool menu state!', 10, 10, 0)
   end
 
@@ -26,12 +36,14 @@ class AnotherState < GosuRPG::GameState
     super
 
     @window.caption = 'Whoa, a second state!'
+    @background_image = Gosu::Image.new(background_path('backgrounds', 'space.png'), tileable: true)
   end
 
   def update
   end
 
   def draw
+    @background_image.draw(0, 0, ZOrder::BACKGROUND)
     @font.draw('This state is even better!!', 20, 20, 0)
   end
 
@@ -41,7 +53,7 @@ class AnotherState < GosuRPG::GameState
 end
 
 GosuRPG.configure do |config|
-  config.window    = GosuRPG::GameWindow.new(500, 500)
+  config.window    = GosuRPG::GameWindow.new(1280, 540)
   config.font_size = 50
 end
 
