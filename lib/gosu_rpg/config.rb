@@ -1,5 +1,5 @@
 module GosuRPG
   class Config
-    attr_accessor :default_caption, :window
+    attr_accessor :default_caption, :window, :font_size
   end
 end
