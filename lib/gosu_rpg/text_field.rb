@@ -2,33 +2,23 @@
 
 module GosuRPG
   class TextField < Gosu::TextInput
-    INACTIVE_COLOR  = 0xcc666666
-    ACTIVE_COLOR    = 0xccff6666
-    SELECTION_COLOR = 0xcc0000ff
-    CARET_COLOR     = 0xffffffff
-    PADDING = 5
-
-    attr_reader :x, :y
-
-    def initialize(window, font, x, y)
+    def initialize(window, font, x, y, background_color=0xcc666666, caret_color=0xffffffff, padding=5)
       super()
 
-      @window, @font, @x, @y = window, font, x, y
+      @window, @font, @x, @y, @background_color, @caret_color, @padding = window, font, x, y, background_color, caret_color, padding
 
       self.text = "nate@hacksh # "
     end
 
     def draw(zorder)
-      background_color = @window.text_input == self ? ACTIVE_COLOR : INACTIVE_COLOR
-
-      @window.draw_quad(x - PADDING,         y - PADDING,          background_color,
-                        x + width + PADDING, y - PADDING,          background_color,
-                        x - PADDING,         y + height + PADDING, background_color,
-                        x + width + PADDING, y + height + PADDING, background_color, 0)
+      @window.draw_quad(@x - @padding,         @y - @padding,          @background_color,
+                        @x + width + @padding, @y - @padding,          @background_color,
+                        @x - @padding,         @y + height + @padding, @background_color,
+                        @x + width + @padding, @y + height + @padding, @background_color, 0)
 
       draw_caret if @window.text_input == self
 
-      @font.draw(self.text, x, y, zorder)
+      @font.draw(self.text, @x, @y, zorder)
     end
 
     def width
@@ -40,13 +30,13 @@ module GosuRPG
     end
 
     def under_point?(mouse_x, mouse_y)
-      mouse_x > x - PADDING && mouse_x < x + width + PADDING &&
-        mouse_y > y - PADDING && mouse_y < y + height + PADDING
+      mouse_x > @x - @padding && mouse_x < @x + width + @padding &&
+        mouse_y > @y - @padding && mouse_y < @y + height + @padding
     end
 
     def move_caret(mouse_x)
       1.upto(self.text.length) do |i|
-        if mouse_x < x + @font.text_width(text[0...i])
+        if mouse_x < @x + @font.text_width(text[0...i])
           self.caret_pos = self.selection_start = i - 1
           return
         end
@@ -57,10 +47,10 @@ module GosuRPG
     private
 
     def draw_caret
-      pos_x = x + @font.text_width(self.text[0...self.caret_pos])
-      sel_x = x + @font.text_width(self.text[0...self.selection_start])
+      pos_x = @x + @font.text_width(self.text[0...self.caret_pos])
+      sel_x = @x + @font.text_width(self.text[0...self.selection_start])
 
-      @window.draw_line(pos_x, y, CARET_COLOR, pos_x, y + height, CARET_COLOR, 0)
+      @window.draw_line(pos_x, @y, @caret_color, pos_x, @y + height, @caret_color, 0)
     end
   end
 end
