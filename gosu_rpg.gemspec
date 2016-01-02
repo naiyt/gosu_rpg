@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version        =  GosuRPG::VERSION
   gem.date           =  '2016-01-01'
   gem.summary        =  'A framework for making an RPG using Gosu'
-  gem.description    =  'TODO: Add description'
+  gem.description    =  'Add description'
   gem.authors        =  ["Nate Collings"]
   gem.email          =  'nate@natecollings.com'
   gem.homepage       =  'https://github.com/naiyt/gosu_rpg'
