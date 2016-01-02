@@ -6,8 +6,6 @@ module GosuRPG
       super()
 
       @window, @font, @x, @y, @background_color, @caret_color, @padding = window, font, x, y, background_color, caret_color, padding
-
-      self.text = "nate@hacksh # "
     end
 
     def draw(zorder)
